@@ -156,7 +156,6 @@ end
 
 
 function Game:createEnemy()
-    ----@type Sprite
     --local vvv= cc.Sprite:create("cocosui/sliderballpressed.png")
     --vvv:setPosition(cc.p(200,400));
     --self.layer:addChild(vvv);

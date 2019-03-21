@@ -10,7 +10,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="cocos2dx-3.17-api-output" level="project" />
+    <orderEntry type="library" name="2dx-3.17-output" level="project" />
     <orderEntry type="library" name="otherApi" level="project" />
   </component>
 </module>

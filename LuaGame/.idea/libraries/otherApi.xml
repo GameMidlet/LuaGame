@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="otherApi">
+  <library name="otherApi" type="Lua">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../Environment/cocos2dx/lua/api/otherApi.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Environment/cocos2dx/lua/api/otherApi.zip!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
