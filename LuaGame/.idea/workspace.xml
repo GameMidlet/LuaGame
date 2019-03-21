@@ -131,8 +131,8 @@
     <annotation-enable>false</annotation-enable>
     <other-services-enabled>true</other-services-enabled>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="548" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="46" />
     <option name="y" value="23" />
     <option name="width" value="1234" />
     <option name="height" value="777" />

@@ -1,2 +1,9 @@
-# 学习程序的一些笔记
-- csdn [csdn](https://blog.csdn.net/GameCocos2dx)
+# lua 做一个塔防小游戏
+实现游戏内道具升级，小怪闯关
+
+
+# 塔防小游戏
+- 添加地图
+- 不同小怪
+- 道具
+
