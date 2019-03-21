@@ -19,12 +19,16 @@ function Game:objectInit()
     ---@type Infantry
     self.enemy=nil;
 
-    ---@type table
+    ---@type table 管理敌人
     self.enemyManage={
-        position={};
-        object={};
+        position={};--位置:敌人位置，第1个是初始化坐标，其他是走动位置
+        object={};--敌人管理对象
     };
 
+    ---@type table 管理防御塔
+    self.guardTowerManage={
+        position={};--位置:防御塔
+    };
     ---@type table
     self.enemyStartPositon=nil;--敌人位置
 end
@@ -37,13 +41,20 @@ function Game:create()
     self.layer:addChild(vMap);
 
     ---@type TMXObjectGroup
-    local vObject=vMap:getObjectGroup("object");---对象层
+    local vGuardTower=vMap:getObjectGroup("guardTower");---对象层
+    local vGTable=vGuardTower:getObjects(); --遍历所有的点
+    for i in pairs(vGTable) do
+        local v=cc.p(vGTable[i].x+vGTable[i].width*0.5,vGTable[i].y+vGTable[i].height*0.5);
+        Log.debug("防御塔 name:"..vGTable[i].name.." x:"..v.x.." y:"..v.y);
+        table.insert(self.guardTowerManage.position,v);
+    end
+
     --local vObjectArray =vMap:getObjectGroups();
     --for i in vObjectArray do
     --    print("对象名字:"..i.name);
     --end
     --for k ,v in next,vObjectArray do print(k..":"..v);  end
-    local heroInfo = vObject:getObject("fyt1");--获取子节点,返回节点信息
+    --local heroInfo = vObject:getObject("fyt1");--获取子节点,返回节点信息
     --节点信息 id,type,name,width,height,x,y, 其中xy是左下角坐标
     -- for k ,v in next,heroInfo do print(k..":"..v);  end
 
@@ -51,11 +62,12 @@ function Game:create()
     --hero:setPosition(heroInfo.x+heroInfo.width*0.5, heroInfo.y+heroInfo.height*0.5);
     --self.map:addChild(hero);
 
+    ---@type TMXObjectGroup
     local vEnemyPosition=vMap:getObjectGroup("enemy");---对象层
     local vTable=vEnemyPosition:getObjects(); --遍历所有的点
     for i in pairs(vTable) do
         local v=cc.p(vTable[i].x+vTable[i].width*0.5,vTable[i].y+vTable[i].height*0.5);
-        Log.debug("name:"..vTable[i].name.." x:"..v.x.." y:"..v.y);
+        Log.debug("敌人 name:"..vTable[i].name.." x:"..v.x.." y:"..v.y);
         table.insert(self.enemyManage.position,v);
     end
 
