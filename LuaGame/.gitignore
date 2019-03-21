@@ -1,0 +1,19 @@
+web-mobile/*
+web-desktop/*
+
+jsb-default/frameworks/cocos2d-x/cocos/platform/android/libcocos2dx/build/*
+jsb-default/frameworks/cocos2d-x/build/cocos2d_libs.xcodeproj/xcuserdata/*
+jsb-default/frameworks/cocos2d-x/cocos/scripting/js-bindings/proj.ios_mac/cocos2d_js_bindings.xcodeproj/xcuserdata/*
+
+
+jsb-default/frameworks/runtime-src/proj.android-studio/build/*
+jsb-default/frameworks/runtime-src/proj.android-studio/app/assets/*
+jsb-default/frameworks/runtime-src/proj.android-studio/app/libs/armeabi-v7a/*
+jsb-default/frameworks/runtime-src/proj.android-studio/app/build/*
+
+jsb-default/src/*
+jsb-default/res/*
+jsb-default/js backups (useful for debugging)/*
+
+.gradle/
+.externalNativeBuild/

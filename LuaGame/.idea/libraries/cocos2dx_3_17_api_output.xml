@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cocos2dx-3.17-api-output">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Environment/cocos2dx/lua/api/cocos2dx-3.17-api-output.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
