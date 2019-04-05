@@ -43,13 +43,14 @@ end
 ---@param args string
 ---@vararg T
 function Log.warn (args, ...)
-    local vstring = debug.traceback("", 2);
-    --print("warn.trace:" .. vpath);
-    local vpath = Log.csA(vstring);
-    --print("path:" .. vpath);
-    args=vpath.." "..args;
-    --args=vstring.." "..args;
-
+    if(Log.logType == Log.gameLogType.DEBUG)then
+        local vstring = debug.traceback("", 2);
+        local vpath = Log.csA(vstring);
+        --print("warn.trace:" .. vpath);
+        --print("path:" .. vpath);
+        args=vpath.." "..args;
+        --args=vstring.." "..args;
+    end
     local vSubst = Log.setLinkString(args, ...);
     Log.showContent(vSubst, Log.gameLogType.WARN);
 end
@@ -100,13 +101,18 @@ function Log.showContent(vShow, vType)
             --print("stype:"..stype);
             show = string.format("%s:%s", stype, show);
         end
+        if(cc)then
+            local targetPlatform= cc.Application:getInstance():getTargetPlatform();
+            print("\t\ttargetPlatform:"..targetPlatform)
+            if (targetPlatform == cc.PLATFORM_OS_ANDROID or targetPlatform == cc.PLATFORM_OS_IPHONE)then
+                show = string.format("cocos2dx %s",show);
+            end
+        end
     end
-
     if (Log.logType ~= Log.gameLogType.NONE) then
         Log.outLog(show, vType);
         --Log.logObject(show);
     end
-
     Log.setSceneLog(show);
 end
 
@@ -130,6 +136,14 @@ end
 ---@param args string
 function Log.setSceneLog(args)
     local vname = "12";
+    if(cc)then
+        local vScene=cc.Director:getInstance():getRunningScene();
+        if(vScene)then
+            local vName=vScene:getName();
+            --print("场景名字:",vName);
+            vname=vName;
+        end
+    end
     local fgf = '\n';
     if (Log.sceneLog[vname] == nil) then
         Log.sceneLog[vname] = {};
@@ -206,11 +220,13 @@ function Log.setLinkString(args, ...)
     local count = select('#', ...);
     --print("c count:"..count);
 
+    local vGlArray={};
     local show = "" .. args;
     --/%\d{0,}[c|d|i|e|f|g|o|s|x|p|n|u]/
     local pattern = '%%[c,d,i,e,f,g,o,s,x,p,n,u]';
     for s in string.gmatch(show, pattern) do
-        --print(s)
+        --print("\t\t"..s);
+        table.insert(vGlArray,s);
         local len = string.len(s);
         local vc = "";
         if (len >= 2) then
@@ -235,12 +251,16 @@ function Log.setLinkString(args, ...)
         end
         index = index + 1;
     end
-
-    --print("\t\tindex:"..index);
-    --print("\t\tcount:"..count);
+    local vTabCount=#vGlArray;
+    --print("\t\tindex:"..index .." count:"..count.."  vTabCount:"..vTabCount);
     local varg="";
-    if(index < count)then
-        for i=count-index, count do
+    if(vTabCount==0)then
+        for i=1, count do
+            varg=string.format("%s%s",varg,value[i]);
+        end
+    elseif(vTabCount < count)then
+        for i=vTabCount+1, count do
+            print("\t\ti:"..i.." :"..value[i]);
             varg=string.format("%s%s",varg,value[i]);
         end
     end
@@ -248,9 +268,6 @@ function Log.setLinkString(args, ...)
     --print("show:"..show);
     return show..varg;
 end
-
-
-
 
 
 ---字符串切割
